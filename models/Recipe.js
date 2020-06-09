@@ -11,8 +11,14 @@ const RecipeSchema = mongoose.Schema({
   ingredients: {
     type: String
   },
+  directions: {
+    type: String
+  },
   originalURL: {
     type: String
+  },
+  isArchived: {
+    type: Boolean
   },
   type: {
     type: String,
