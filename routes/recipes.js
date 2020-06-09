@@ -42,7 +42,7 @@ router.post(
       name,
       ingredients,
       directions,
-      originalURL,
+      source,
       isArchived,
       type
     } = req.body;
@@ -51,7 +51,7 @@ router.post(
         name,
         ingredients,
         directions,
-        originalURL,
+        source,
         isArchived,
         type,
         user: req.user.id
@@ -70,21 +70,14 @@ router.post(
 // @ access Private
 router.put('/:id', auth, async (req, res) => {
   //
-  const {
-    name,
-    ingredients,
-    directions,
-    originalURL,
-    isArchived,
-    type
-  } = req.body;
+  const { name, ingredients, directions, source, isArchived, type } = req.body;
 
   // Build a recipe object
   const recipeFields = {};
   if (name) recipeFields.name = name;
   if (ingredients) recipeFields.ingredients = ingredients;
   if (directions) recipeFields.directions = directions;
-  if (originalURL) recipeFields.originalURL = originalURL;
+  if (source) recipeFields.source = source;
   if (isArchived) recipeFields.isArchived = isArchived;
   if (type) recipeFields.type = type;
 
