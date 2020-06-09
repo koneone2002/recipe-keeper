@@ -87,27 +87,27 @@ router.put('/:id', auth, async (req, res) => {
   if (originalURL) recipeFields.originalURL = originalURL;
   if (isArchived) recipeFields.isArchived = isArchived;
   if (type) recipeFields.type = type;
-});
 
-try {
-  let contact = await Recipe.findById(req.params.id);
-  if (!recipe) {
-    return res.status(404).json({ msg: 'Recipe not found' });
+  try {
+    let recipe = await Recipe.findById(req.params.id);
+    if (!recipe) {
+      return res.status(404).json({ msg: 'Recipe not found' });
+    }
+    // Make sure user owns contact
+    if (recipe.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'Not authorized' });
+    }
+    recipe = await Recipe.findByIdAndUpdate(
+      req.params.id,
+      { $set: recipeFields },
+      { new: true }
+    );
+    res.json(recipe);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
   }
-  // Make sure user owns contact
-  if (recipe.user.toString() !== req.user.id) {
-    return res.status(401).json({ msg: 'Not authorized' });
-  }
-  recipe = await Recipe.findByIdAndUpdate(
-    req.params.id,
-    { $set: recipeFields },
-    { new: true }
-  );
-  res.json(recipe);
-} catch (err) {
-  console.error(err.message);
-  res.status(500).send('Server Error');
-}
+});
 
 // @route DELETE api/recipes/:id
 // @ desc Delete a recipe
