@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 import RecipeContext from './recipeContext';
 import recipeReducer from './recipeReducer';
@@ -46,7 +46,10 @@ const RecipeState = props => {
   const [state, dispatch] = useReducer(recipeReducer, initialState);
 
   // Add Recipe
-
+  const addRecipe = recipe => {
+    recipe.id = uuidv4();
+    dispatch({ type: ADD_RECIPE, payload: recipe });
+  };
   // Delete Recipe
 
   // Set Current Recipe
@@ -62,7 +65,8 @@ const RecipeState = props => {
   return (
     <RecipeContext.Provider
       value={{
-        recipes: state.recipes
+        recipes: state.recipes,
+        addRecipe
       }}
     >
       {props.children}

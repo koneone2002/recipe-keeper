@@ -1,18 +1,19 @@
 import React from 'react';
-
 import Recipes from '../recipes/Recipes';
+import RecipeForm from '../recipes/RecipeForm';
 import RecipeState from '../../context/recipe/RecipeState';
 const RecipeContainer = () => {
   return (
     <div className='grid-2'>
-      <div>{/* Contact Form */}</div>
+      <RecipeState>
+        <div>{<RecipeForm />}</div>
 
-      <div>
-        <RecipeState>
+        <div>
           <Recipes />
-        </RecipeState>
-        {/* <Recipes /> */}
-      </div>
+
+          {/* <Recipes /> */}
+        </div>
+      </RecipeState>
     </div>
   );
 };
