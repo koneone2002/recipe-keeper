@@ -1,7 +1,23 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import RecipeContext from '../../context/recipe/recipeContext';
 const RecipeForm = () => {
   const recipeContext = useContext(RecipeContext);
+  const { addRecipe, current } = recipeContext;
+
+  useEffect(() => {
+    if (current !== null) {
+      setRecipe(current);
+    } else {
+      setRecipe({
+        name: '',
+        ingredients: '',
+        directions: '',
+        source: '',
+        type: 'personal'
+      });
+    }
+  }, [recipeContext, current]);
+
   const [recipe, setRecipe] = useState({
     name: '',
     ingredients: '',
@@ -19,7 +35,7 @@ const RecipeForm = () => {
     });
   const onSubmit = e => {
     e.preventDefault();
-    recipeContext.addRecipe(recipe);
+    addRecipe(recipe);
     setRecipe({
       name: '',
       ingredients: '',

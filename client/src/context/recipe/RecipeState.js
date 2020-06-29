@@ -30,7 +30,7 @@ const RecipeState = props => {
         ingredients: 'Noodles',
         directions: 'Stir them up',
         source: 'http://someurl.com',
-        type: 'business'
+        type: 'professional'
       },
       {
         id: 3,
