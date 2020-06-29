@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import RecipeContext from '../../context/recipe/recipeContext';
 
 const RecipeItem = ({ recipe }) => {
+  const recipeContext = useContext(RecipeContext);
+  const { deleteRecipe } = recipeContext;
   const { name, ingredients, directions, source, type, id } = recipe;
+
+  const onDelete = () => {
+    deleteRecipe(id);
+  };
+
   return (
     <div className='card bg-light'>
       <h3 className='text-primary text-left'>
@@ -35,8 +43,10 @@ const RecipeItem = ({ recipe }) => {
         )}
       </ul>
       <p>
-        <button className='btn btn-dark btn-small'>Edit</button>
-        <button className='btn btn-danger btn-small'>Delete</button>
+        <button className='btn btn-dark btn-sm'>Edit</button>
+        <button className='btn btn-danger btn-sm' onClick={onDelete}>
+          Delete
+        </button>
       </p>
     </div>
   );

@@ -51,7 +51,9 @@ const RecipeState = props => {
     dispatch({ type: ADD_RECIPE, payload: recipe });
   };
   // Delete Recipe
-
+  const deleteRecipe = id => {
+    dispatch({ type: DELETE_RECIPE, payload: id });
+  };
   // Set Current Recipe
 
   // Clear Current Recipe
@@ -66,7 +68,8 @@ const RecipeState = props => {
     <RecipeContext.Provider
       value={{
         recipes: state.recipes,
-        addRecipe
+        addRecipe,
+        deleteRecipe
       }}
     >
       {props.children}
