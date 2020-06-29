@@ -40,7 +40,8 @@ const RecipeState = props => {
         source: 'http://someurl.com',
         type: 'personal'
       }
-    ]
+    ],
+    current: null
   };
 
   const [state, dispatch] = useReducer(recipeReducer, initialState);
@@ -55,9 +56,13 @@ const RecipeState = props => {
     dispatch({ type: DELETE_RECIPE, payload: id });
   };
   // Set Current Recipe
-
+  const setCurrent = recipe => {
+    dispatch({ type: SET_CURRENT, payload: recipe });
+  };
   // Clear Current Recipe
-
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT });
+  };
   // Update Recipe
 
   // Filter Recipes
@@ -68,8 +73,11 @@ const RecipeState = props => {
     <RecipeContext.Provider
       value={{
         recipes: state.recipes,
+        current: state.current,
         addRecipe,
-        deleteRecipe
+        deleteRecipe,
+        setCurrent,
+        clearCurrent
       }}
     >
       {props.children}

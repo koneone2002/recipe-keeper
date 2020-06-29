@@ -4,11 +4,12 @@ import RecipeContext from '../../context/recipe/recipeContext';
 
 const RecipeItem = ({ recipe }) => {
   const recipeContext = useContext(RecipeContext);
-  const { deleteRecipe } = recipeContext;
+  const { deleteRecipe, setCurrent, clearCurrent } = recipeContext;
   const { name, ingredients, directions, source, type, id } = recipe;
 
   const onDelete = () => {
     deleteRecipe(id);
+    clearCurrent();
   };
 
   return (
@@ -43,7 +44,12 @@ const RecipeItem = ({ recipe }) => {
         )}
       </ul>
       <p>
-        <button className='btn btn-dark btn-sm'>Edit</button>
+        <button
+          className='btn btn-dark btn-sm'
+          onClick={() => setCurrent(recipe)}
+        >
+          Edit
+        </button>
         <button className='btn btn-danger btn-sm' onClick={onDelete}>
           Delete
         </button>
