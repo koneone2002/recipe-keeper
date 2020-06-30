@@ -15,6 +15,13 @@ export default (state, action) => {
         ...state,
         recipes: [...state.recipes, action.payload]
       };
+    case UPDATE_RECIPE:
+      return {
+        ...state,
+        recipes: state.recipes.map(recipe =>
+          recipe.id === action.payload.id ? action.payload : recipe
+        )
+      };
     case DELETE_RECIPE:
       return {
         ...state,

@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import RecipeContext from '../../context/recipe/recipeContext';
+
 const RecipeForm = () => {
   const recipeContext = useContext(RecipeContext);
-  const { addRecipe, current } = recipeContext;
+  const { addRecipe, updateRecipe, clearCurrent, current } = recipeContext;
 
   useEffect(() => {
     if (current !== null) {
@@ -35,18 +36,19 @@ const RecipeForm = () => {
     });
   const onSubmit = e => {
     e.preventDefault();
-    addRecipe(recipe);
-    setRecipe({
-      name: '',
-      ingredients: '',
-      directions: '',
-      source: '',
-      type: 'personal'
-    });
+    if (current === null) {
+      addRecipe(recipe);
+    } else {
+      updateRecipe(recipe);
+    }
+    clearAll();
+  };
+  const clearAll = () => {
+    clearCurrent();
   };
   return (
     <form onSubmit={onSubmit}>
-      <h2 className='text-primary'>Add Recipe</h2>
+      <h2 className='text-primary'>{current ? 'Edit Recipe' : 'Add Recipe'}</h2>
       <input
         type='text'
         placeholder='Name'
@@ -88,9 +90,14 @@ const RecipeForm = () => {
       <div>
         <input
           type='submit'
-          value='Add Recipe'
+          value={current ? 'Edit Recipe' : 'Add Recipe'}
           className='btn btn-primary btn-block'
         />
+      </div>
+      <div>
+        <button className='btn-btn-light btn-block' onClick={clearAll}>
+          Clear
+        </button>
       </div>
     </form>
   );

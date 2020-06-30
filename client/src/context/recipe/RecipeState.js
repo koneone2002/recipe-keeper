@@ -64,7 +64,9 @@ const RecipeState = props => {
     dispatch({ type: CLEAR_CURRENT });
   };
   // Update Recipe
-
+  const updateRecipe = recipe => {
+    dispatch({ type: UPDATE_RECIPE, payload: recipe });
+  };
   // Filter Recipes
 
   // Clear Filter
@@ -77,7 +79,8 @@ const RecipeState = props => {
         addRecipe,
         deleteRecipe,
         setCurrent,
-        clearCurrent
+        clearCurrent,
+        updateRecipe
       }}
     >
       {props.children}
