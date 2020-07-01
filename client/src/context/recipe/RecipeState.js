@@ -41,7 +41,8 @@ const RecipeState = props => {
         type: 'personal'
       }
     ],
-    current: null
+    current: null,
+    filtered: null
   };
 
   const [state, dispatch] = useReducer(recipeReducer, initialState);
@@ -68,19 +69,27 @@ const RecipeState = props => {
     dispatch({ type: UPDATE_RECIPE, payload: recipe });
   };
   // Filter Recipes
-
+  const filterRecipes = text => {
+    dispatch({ type: FILTER_RECIPE, payload: text });
+  };
   // Clear Filter
+  const clearFilter = () => {
+    dispatch({ type: CLEAR_FILTER });
+  };
 
   return (
     <RecipeContext.Provider
       value={{
         recipes: state.recipes,
         current: state.current,
+        filtered: state.filtered,
         addRecipe,
         deleteRecipe,
         setCurrent,
         clearCurrent,
-        updateRecipe
+        updateRecipe,
+        filterRecipes,
+        clearFilter
       }}
     >
       {props.children}

@@ -2,6 +2,7 @@ import React from 'react';
 import Recipes from '../recipes/Recipes';
 import RecipeForm from '../recipes/RecipeForm';
 import RecipeState from '../../context/recipe/RecipeState';
+import RecipeFilter from '../recipes/RecipeFilter';
 const RecipeContainer = () => {
   return (
     <div className='grid-2'>
@@ -9,6 +10,7 @@ const RecipeContainer = () => {
         <div>{<RecipeForm />}</div>
 
         <div>
+          <RecipeFilter />
           <Recipes />
 
           {/* <Recipes /> */}

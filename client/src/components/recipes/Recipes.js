@@ -5,13 +5,15 @@ import RecipeItem from './RecipeItem';
 const Recipes = () => {
   const recipeContext = useContext(RecipeContext);
 
-  const { recipes } = recipeContext;
-
+  const { recipes, filtered } = recipeContext;
+  if (recipes.length === 0) {
+    return <h4>Please add a recipe</h4>;
+  }
   return (
     <Fragment>
-      {recipes.map(recipe => (
-        <RecipeItem recipe={recipe} key={recipe.id} />
-      ))}
+      {filtered !== null
+        ? filtered.map(recipe => <RecipeItem recipe={recipe} key={recipe.id} />)
+        : recipes.map(recipe => <RecipeItem recipe={recipe} key={recipe.id} />)}
     </Fragment>
   );
 };

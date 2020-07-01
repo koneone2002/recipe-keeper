@@ -37,6 +37,19 @@ export default (state, action) => {
         ...state,
         current: null
       };
+    case FILTER_RECIPE:
+      return {
+        ...state,
+        filtered: state.recipes.filter(recipe => {
+          const regex = new RegExp(`${action.payload}`, 'gi');
+          return recipe.name.match(regex) || recipe.ingredients.match(regex);
+        })
+      };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filtered: null
+      };
 
     default:
       return state;
