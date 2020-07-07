@@ -1,8 +1,11 @@
 import React, { useState, useContext } from 'react';
+import AuthContext from '../../context/auth/authContext';
 import AlertContext from '../../context/alert/alertContext';
 
 const Register = () => {
   const alertContext = useContext(AlertContext);
+  const authContext = useContext(AuthContext);
+  const { register } = authContext;
   const { setAlert } = alertContext;
   const [user, setUser] = useState({
     name: '',
@@ -21,7 +24,12 @@ const Register = () => {
     } else if (password !== password2) {
       setAlert('Passwords do not Match', 'danger');
     } else {
-      console.log('Register Submit');
+      //console.log('Register Submit');
+      register({
+        name,
+        email,
+        password
+      });
     }
     if (password.length < 6 || password2.length < 6) {
       setAlert('Password must be at least 6 characters', 'danger');
