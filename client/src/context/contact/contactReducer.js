@@ -10,6 +10,7 @@ import {
   CONTACT_ERROR,
   CLEAR_CONTACTS
 } from '../types';
+// adding a comment to allow for git push
 
 export default (state, action) => {
   switch (action.type) {
