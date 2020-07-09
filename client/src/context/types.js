@@ -18,8 +18,11 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const CONTACT_ERROR = 'CONTACT_ERROR';
+export const RECIPE_ERROR = 'RECIPE_ERROR';
 
 export const ADD_RECIPE = 'ADD_RECIPE';
 export const DELETE_RECIPE = 'DELETE_RECIPE';
 export const UPDATE_RECIPE = 'UPDATE_RECIPE';
 export const FILTER_RECIPE = 'FILTER_RECIPE';
+export const CLEAR_RECIPES = 'CLEAR_RECIPES';
+export const GET_RECIPES = 'GET_RECIPES';

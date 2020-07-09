@@ -10,6 +10,7 @@ import PrivateRoute from './components/routing/PrivateRoute';
 import setAuthToken from './utils/setAuthToken';
 import RecipeContainer from './components/pages/RecipeContainer';
 import ContactState from './context/contact/ContactState';
+import RecipeState from './context/recipe/RecipeState';
 import AuthState from './context/auth/AuthState';
 import AlertState from './context/alert/AlertState';
 
@@ -23,6 +24,7 @@ const App = () => {
   return (
     <AuthState>
       <ContactState>
+        <RecipeState>
         <AlertState>
           <Router>
             <Fragment>
@@ -44,6 +46,7 @@ const App = () => {
             </Fragment>
           </Router>
         </AlertState>
+        </RecipeState>
       </ContactState>
     </AuthState>
   );

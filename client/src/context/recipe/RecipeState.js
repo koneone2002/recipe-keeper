@@ -1,61 +1,75 @@
 import React, { useReducer } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 import RecipeContext from './recipeContext';
 import recipeReducer from './recipeReducer';
 import {
+  GET_RECIPES,
   ADD_RECIPE,
   DELETE_RECIPE,
+  CLEAR_RECIPES,
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_RECIPE,
   FILTER_RECIPE,
-  CLEAR_FILTER
+  CLEAR_FILTER,
+  RECIPE_ERROR
 } from '../types';
 
 const RecipeState = props => {
   const initialState = {
-    recipes: [
-      {
-        id: 1,
-        name: 'Hot Wings',
-        ingredients: 'Chicken Wings',
-        directions: 'Spice them up',
-        source: 'http://someurl.com',
-        type: 'personal'
-      },
-      {
-        id: 2,
-        name: 'Pad Thai Noodles',
-        ingredients: 'Noodles',
-        directions: 'Stir them up',
-        source: 'http://someurl.com',
-        type: 'professional'
-      },
-      {
-        id: 3,
-        name: 'Steak Diane',
-        ingredients: 'Sirloin Steak',
-        directions: 'Grill them up',
-        source: 'http://someurl.com',
-        type: 'personal'
-      }
-    ],
+    recipes: null,
     current: null,
-    filtered: null
+    filtered: null,
+    error: null
   };
 
   const [state, dispatch] = useReducer(recipeReducer, initialState);
-
+  // Get Recipes
+  const getRecipes = async () => {
+    try {
+      const res = await axios.get('/api/recipes');
+      dispatch({
+        type: GET_RECIPES,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: RECIPE_ERROR,
+        payload: err.response.msg
+      });
+    }
+  };
   // Add Recipe
-  const addRecipe = recipe => {
-    recipe.id = uuidv4();
-    dispatch({ type: ADD_RECIPE, payload: recipe });
+  const addRecipe = async recipe => {
+    // contact.id = uuidv4();
+    const config = {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    };
+    try {
+      const res = await axios.post('/api/recipes', recipe, config);
+      dispatch({
+        type: ADD_RECIPE,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: RECIPE_ERROR,
+        payload: err.response.msg
+      });
+    }
   };
   // Delete Recipe
   const deleteRecipe = id => {
     dispatch({ type: DELETE_RECIPE, payload: id });
   };
+  // Clear Recipes
+  
+  const clearRecipes = () => {
+    dispatch({ type: CLEAR_RECIPES});
+  }
   // Set Current Recipe
   const setCurrent = recipe => {
     dispatch({ type: SET_CURRENT, payload: recipe });
@@ -83,13 +97,16 @@ const RecipeState = props => {
         recipes: state.recipes,
         current: state.current,
         filtered: state.filtered,
+        error: state.error,
         addRecipe,
         deleteRecipe,
+        clearRecipes,
         setCurrent,
         clearCurrent,
         updateRecipe,
         filterRecipes,
-        clearFilter
+        clearFilter,
+        getRecipes
       }}
     >
       {props.children}

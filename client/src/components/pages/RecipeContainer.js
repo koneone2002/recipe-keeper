@@ -1,12 +1,12 @@
 import React from 'react';
 import Recipes from '../recipes/Recipes';
 import RecipeForm from '../recipes/RecipeForm';
-import RecipeState from '../../context/recipe/RecipeState';
+// import RecipeState from '../../context/recipe/RecipeState';
 import RecipeFilter from '../recipes/RecipeFilter';
 const RecipeContainer = () => {
   return (
     <div className='grid-2'>
-      <RecipeState>
+      {/* <RecipeState> */}
         <div>{<RecipeForm />}</div>
 
         <div>
@@ -15,7 +15,7 @@ const RecipeContainer = () => {
 
           {/* <Recipes /> */}
         </div>
-      </RecipeState>
+      {/* </RecipeState> */}
     </div>
   );
 };
