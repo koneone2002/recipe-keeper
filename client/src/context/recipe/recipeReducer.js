@@ -37,18 +37,16 @@ export default (state, action) => {
     case DELETE_RECIPE:
       return {
         ...state,
-        recipes: state.recipes.filter(
-          recipe => recipe._id !== action.payload
-        ),
+        recipes: state.recipes.filter(recipe => recipe._id !== action.payload),
         loading: false
       };
     case CLEAR_RECIPES:
       return {
         ...state,
-        recipes: null,
-    current: null,
-    filtered: null,
-    error: null
+        recipes: [],
+        current: null,
+        filtered: null,
+        error: null
       };
     case SET_CURRENT:
       return {

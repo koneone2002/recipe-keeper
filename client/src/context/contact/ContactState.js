@@ -41,7 +41,7 @@ const ContactState = props => {
     //     type: 'professional'
     //   }
     // ],
-    contacts: null,
+    contacts: [],
     current: null,
     filtered: null,
     error: null

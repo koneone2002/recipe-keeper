@@ -18,7 +18,7 @@ import {
 
 const RecipeState = props => {
   const initialState = {
-    recipes: null,
+    recipes: [],
     current: null,
     filtered: null,
     error: null
@@ -66,10 +66,9 @@ const RecipeState = props => {
     dispatch({ type: DELETE_RECIPE, payload: id });
   };
   // Clear Recipes
-  
   const clearRecipes = () => {
-    dispatch({ type: CLEAR_RECIPES});
-  }
+    dispatch({ type: CLEAR_RECIPES });
+  };
   // Set Current Recipe
   const setCurrent = recipe => {
     dispatch({ type: SET_CURRENT, payload: recipe });
