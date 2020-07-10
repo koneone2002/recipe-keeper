@@ -5,10 +5,10 @@ import RecipeContext from '../../context/recipe/recipeContext';
 const RecipeItem = ({ recipe }) => {
   const recipeContext = useContext(RecipeContext);
   const { deleteRecipe, setCurrent, clearCurrent } = recipeContext;
-  const { name, ingredients, directions, source, type, id } = recipe;
+  const { name, ingredients, directions, source, type, _id } = recipe;
 
   const onDelete = () => {
-    deleteRecipe(id);
+    deleteRecipe(_id);
     clearCurrent();
   };
 
