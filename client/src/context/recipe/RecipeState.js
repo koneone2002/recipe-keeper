@@ -62,8 +62,39 @@ const RecipeState = props => {
     }
   };
   // Delete Recipe
-  const deleteRecipe = id => {
-    dispatch({ type: DELETE_RECIPE, payload: id });
+  const deleteRecipe = async id => {
+    try {
+      await axios.delete(`/api/recipes/${id}`);
+      dispatch({
+        type: DELETE_RECIPE,
+        payload: id
+      });
+    } catch (err) {
+      dispatch({
+        type: RECIPE_ERROR,
+        payload: err.response.msg
+      });
+    }
+  };
+  // Update Recipe
+  const updateRecipe = async recipe => {
+    const config = {
+      headers: {
+        'Content-type': 'application/json'
+      }
+    };
+    try {
+      const res = await axios.put(`/api/recipes/${recipe._id}`, recipe, config);
+      dispatch({
+        type: UPDATE_RECIPE,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: RECIPE_ERROR,
+        payload: err.response.msg
+      });
+    }
   };
   // Clear Recipes
   const clearRecipes = () => {
@@ -77,10 +108,7 @@ const RecipeState = props => {
   const clearCurrent = () => {
     dispatch({ type: CLEAR_CURRENT });
   };
-  // Update Recipe
-  const updateRecipe = recipe => {
-    dispatch({ type: UPDATE_RECIPE, payload: recipe });
-  };
+
   // Filter Recipes
   const filterRecipes = text => {
     dispatch({ type: FILTER_RECIPE, payload: text });
