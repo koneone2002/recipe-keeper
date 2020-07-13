@@ -77,7 +77,7 @@ const RecipeForm = () => {
         value={source}
         onChange={onChange}
       />
-      <h5>Type</h5>
+      <h5>Rating</h5>
       <input
         type='radio'
         name='type'
