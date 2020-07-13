@@ -20,7 +20,11 @@ const RecipeItem = ({ recipe }) => {
           style={{ float: 'right' }}
           className={
             'badge ' +
-            (type === 'professional' ? 'badge-success' : 'badge-primary')
+            (type === 'delicious'
+              ? 'badge-success'
+              : type === 'mediocre'
+              ? 'badge-primary'
+              : 'badge-danger')
           }
         >
           {type.charAt(0).toUpperCase() + type.slice(1)}
@@ -29,17 +33,17 @@ const RecipeItem = ({ recipe }) => {
       <ul className='list'>
         {ingredients && (
           <li>
-            <i className='fas fa-envelope-open'> </i> {ingredients}
+            <i className='fas fa-bread-slice'> </i> {ingredients}
           </li>
         )}
         {directions && (
           <li>
-            <i className='fas fa-phone'> </i> {directions}
+            <i className='fas fa-hamburger'> </i> {directions}
           </li>
         )}
         {source && (
           <li>
-            <i className='fas fa-phone'> </i> {source}
+            <i className='fas fa-globe'> </i> {source}
           </li>
         )}
       </ul>

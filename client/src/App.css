@@ -309,13 +309,16 @@ textarea {
   padding: 0.4rem;
   font-size: 1.2rem;
   border: 1px solid #ccc;
+  font-family: inherit;
 }
 
 input[type='submit'],
 button {
   font: inherit;
 }
-
+textarea {
+  margin-bottom: 20px;
+}
 .form-group {
   margin: 1.2rem 0;
 }

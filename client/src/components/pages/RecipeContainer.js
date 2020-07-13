@@ -13,7 +13,6 @@ const RecipeContainer = () => {
   }, []);
   return (
     <div className='grid-2'>
-      {/* <RecipeState> */}
       <div>{<RecipeForm />}</div>
 
       <div>
@@ -22,7 +21,6 @@ const RecipeContainer = () => {
 
         {/* <Recipes /> */}
       </div>
-      {/* </RecipeState> */}
     </div>
   );
 };

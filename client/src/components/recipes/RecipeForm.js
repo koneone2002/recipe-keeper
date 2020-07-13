@@ -14,7 +14,7 @@ const RecipeForm = () => {
         ingredients: '',
         directions: '',
         source: '',
-        type: 'personal'
+        type: 'delicious'
       });
     }
   }, [recipeContext, current]);
@@ -56,37 +56,53 @@ const RecipeForm = () => {
         value={name}
         onChange={onChange}
       />
-      <input
+      <textarea
         type='text'
         placeholder='Ingredients'
         name='ingredients'
         value={ingredients}
         onChange={onChange}
       />
-      <input
+      <textarea
         type='text'
         placeholder='Directions'
         name='directions'
         value={directions}
         onChange={onChange}
       />
+      <input
+        type='text'
+        placeholder='Source'
+        name='source'
+        value={source}
+        onChange={onChange}
+      />
       <h5>Type</h5>
       <input
         type='radio'
         name='type'
-        value='personal'
-        checked={type === 'personal'}
+        value='delicious'
+        checked={type === 'delicious'}
         onChange={onChange}
       />{' '}
-      Personal{' '}
+      Delicious{' '}
       <input
         type='radio'
         name='type'
-        value='professional'
-        checked={type === 'professional'}
+        value='mediocre'
+        checked={type === 'mediocre'}
         onChange={onChange}
       />{' '}
-      Professional{' '}
+      Mediocre{' '}
+      <input
+        type='radio'
+        name='type'
+        value="don't make again!"
+        checked={type === "don't make again!"}
+        onChange={onChange}
+        className='bg-alert'
+      />{' '}
+      "Don't make again!"{' '}
       <div>
         <input
           type='submit'
