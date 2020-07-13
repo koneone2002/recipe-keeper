@@ -62,7 +62,7 @@ Navbar.propTypes = {
 };
 Navbar.defaultProps = {
   title: 'Recipe Keeper',
-  icon: 'fas fa-id-card-alt'
+  icon: 'fas fa-hamburger'
 };
 
 export default Navbar;
